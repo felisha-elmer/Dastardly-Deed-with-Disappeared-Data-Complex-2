@@ -4,6 +4,8 @@
 
 This walkthrough covers how to decrypt a password-protected ZIP file using steganography, multi-layer encoding, AES decryption, and a known-plaintext attack with PkCrack. This builds on the methods from Complex 1 with additional steps involving a hidden message inside a PNG image and a secret key encoded in Base64 and Morse code.
 
+> **Please be advised that some of your commands will be different based on where your files are located. This is only the steps on what I did, giving you an idea on what to do.**
+
 ---
 
 ## Step 1: Download and Install Java on Windows
@@ -89,7 +91,13 @@ This produces `astral.jpg` in `E:\Ione\safe_extracted\`.
 
 ---
 
-## Step 6: Transfer Files to Kali
+## Step 6: Download and Install FileZilla on Windows
+
+FileZilla is used to transfer files between the Windows machine and Kali. Download and install it from https://filezilla-project.org and open the application once installed.
+
+---
+
+## Step 7: Transfer Files to Kali
 
 Use FileZilla to transfer `astral.jpg` and `exfiltratroll.zip` to `~/Desktop/Ione/` on Kali:
 
@@ -100,7 +108,7 @@ Use FileZilla to transfer `astral.jpg` and `exfiltratroll.zip` to `~/Desktop/Ion
 
 ---
 
-## Step 7: Install PkCrack on Kali
+## Step 8: Install PkCrack on Kali
 
 Clone the PkCrack repository and make the binary executable:
 
@@ -114,7 +122,7 @@ chmod +x ~/pkcrack/bin/pkcrack
 
 ---
 
-## Step 8: Create a ZIP of astral.jpg Using 7-Zip
+## Step 9: Create a ZIP of astral.jpg Using 7-Zip
 
 ```bash
 cd ~/Desktop/Ione
@@ -125,7 +133,7 @@ cd ~/Desktop/Ione
 
 ---
 
-## Step 9: Run PkCrack (Known-Plaintext Attack)
+## Step 10: Run PkCrack (Known-Plaintext Attack)
 
 ```bash
 ~/pkcrack/bin/pkcrack -C ~/Desktop/Ione/exfiltratroll.zip -c astral.jpg -P ~/Desktop/Ione/astral.zip -p astral.jpg -d ~/Desktop/Ione/cracked.zip -a
@@ -153,7 +161,7 @@ Finished on Tue May 12 19:57:05 2026
 
 ---
 
-## Step 10: Extract the Decrypted ZIP
+## Step 11: Extract the Decrypted ZIP
 
 ```bash
 cd ~/Desktop/Ione
